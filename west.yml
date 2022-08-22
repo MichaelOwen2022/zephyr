@@ -46,6 +46,10 @@ manifest:
       path: modules/fs/fatfs
       groups:
         - fs
+    - name: devfs
+      path: modules/fs/devfs
+      groups:
+        - fs
     - name: fff
       revision: 6ce5ba26486e93d5b7696a3e23f0585932c14b16
       path: modules/lib/fff

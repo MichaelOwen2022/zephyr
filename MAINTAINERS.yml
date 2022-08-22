@@ -2128,6 +2128,14 @@ West:
   labels:
     - manifest-edtt
 
+"West project: devfs":
+  status: maintained
+  maintainers:
+    - de-nordic
+  files: []
+  labels:
+    - manifest-devfs
+
 "West project: fatfs":
   status: maintained
   maintainers:

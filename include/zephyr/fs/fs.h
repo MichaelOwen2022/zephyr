@@ -46,8 +46,11 @@ enum fs_dir_entry_type {
  * used by the application.
  */
 enum {
+	/** Identifier for in-tree DevFS file system. */
+	FS_DEVFS = 0,
+
 	/** Identifier for in-tree FatFS file system. */
-	FS_FATFS = 0,
+	FS_FATFS,
 
 	/** Identifier for in-tree LittleFS file system. */
 	FS_LITTLEFS,
@@ -443,6 +446,22 @@ int fs_truncate(struct fs_file_t *zfp, off_t length);
  * @retval <0 a negative errno code on error.
  */
 int fs_sync(struct fs_file_t *zfp);
+
+#if defined(CONFIG_FILE_SYSTEM_DEVFS)
+/**
+ * @brief ioctl
+ *
+ * @param zfp Pointer to the file object
+ * @param cmd Cmd
+ * @param arg Argument
+ *
+ * @retval 0 on success;
+ * @retval -EBADF when invoked on zfp that represents unopened/closed file;
+ * @retval -ENOTSUP if not supported by underlying file system driver;
+ * @retval <0 an other negative errno code on error.
+ */
+int fs_ioctl(struct fs_file_t *zfp, unsigned int cmd, unsigned long arg);
+#endif
 
 /**
  * @brief Directory create

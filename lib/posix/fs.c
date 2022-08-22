@@ -156,9 +156,21 @@ static int fs_ioctl_vmeth(void *obj, unsigned int request, va_list args)
 		break;
 	}
 
+#if defined(CONFIG_FILE_SYSTEM_DEVFS)
+	default: {
+		unsigned long arg;
+
+		arg = va_arg(args, unsigned long);
+
+		rc = fs_ioctl(&ptr->file, request, arg);
+
+		break;
+	}
+#else
 	default:
 		errno = EOPNOTSUPP;
 		return -1;
+#endif
 	}
 
 	if (rc < 0) {

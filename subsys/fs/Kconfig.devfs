@@ -1,0 +1,37 @@
+# Copyright (c) 2020 tangchunhui@coros.com
+# SPDX-License-Identifier: Apache-2.0
+
+config FILE_SYSTEM_DEVFS
+	bool "DevFS Support"
+	depends on FILE_SYSTEM
+	help
+	  Use the DevFS File system implementation.
+
+if FILE_SYSTEM_DEVFS
+
+menu "DevFS file system settings"
+	visible if FILE_SYSTEM_DEVFS
+
+config DEVFS_MOUNT_POINTER
+	string "DevFS mount pointer"
+	default "/dev"
+
+config FS_DEVFS_NUM_FILES
+	int "Maximum number of opened files"
+	default 32
+
+config FS_DEVFS_NUM_DIRS
+	int "Maximum number of opened directories"
+	default 2
+
+config FS_DEVFS_CHDEV
+	bool "DevFS character device"
+	default y
+
+config FS_DEVFS_BLKDEV
+	bool "DevFS block device"
+	default y
+
+endmenu
+
+endif # FILE_SYSTEM_DEVFS

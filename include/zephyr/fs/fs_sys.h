@@ -50,6 +50,9 @@ struct fs_file_system_t {
 	off_t (*tell)(struct fs_file_t *filp);
 	int (*truncate)(struct fs_file_t *filp, off_t length);
 	int (*sync)(struct fs_file_t *filp);
+#if defined(CONFIG_FILE_SYSTEM_DEVFS)
+	int (*ioctl)(struct fs_file_t *filp, unsigned int cmd, unsigned long arg);
+#endif
 	int (*close)(struct fs_file_t *filp);
 	/* Directory operations */
 	int (*opendir)(struct fs_dir_t *dirp, const char *fs_path);

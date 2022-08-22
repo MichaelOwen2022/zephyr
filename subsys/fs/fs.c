@@ -316,6 +316,28 @@ int fs_sync(struct fs_file_t *zfp)
 	return rc;
 }
 
+#if defined(CONFIG_FILE_SYSTEM_DEVFS)
+int fs_ioctl(struct fs_file_t *zfp, unsigned int cmd, unsigned long arg)
+{
+	int rc = -EINVAL;
+
+	if (zfp->mp == NULL) {
+		return -EBADF;
+	}
+
+	CHECKIF(zfp->mp->fs->ioctl == NULL) {
+		return -ENOTSUP;
+	}
+
+	rc = zfp->mp->fs->ioctl(zfp, cmd, arg);
+	if (rc < 0) {
+		LOG_ERR("file ioctl error (%d)", rc);
+	}
+
+	return rc;
+}
+#endif
+
 /* Directory operations */
 int fs_opendir(struct fs_dir_t *zdp, const char *abs_path)
 {
