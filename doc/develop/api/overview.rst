@@ -376,3 +376,8 @@ current :ref:`stability level <api_lifecycle>`.
      - Stable
      - 1.0
      - 2.0
+
+   * - :ref:`input_api`
+     - Experimental
+     - 3.3
+     - 3.3
